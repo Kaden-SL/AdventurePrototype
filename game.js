@@ -73,6 +73,36 @@ class Demo2 extends AdventureScene {
                 this.showMessage("You've got no other choice, really.");
             })
             .on('pointerdown', () => {
+                this.gotoScene('room3');
+            });
+
+        let finish = this.add.text(this.w * 0.6, this.w * 0.2, '(finish the game)')
+            .setInteractive()
+            .on('pointerover', () => {
+                this.showMessage('*giggles*');
+                this.tweens.add({
+                    targets: finish,
+                    x: this.s + (this.h - 2 * this.s) * Math.random(),
+                    y: this.s + (this.h - 2 * this.s) * Math.random(),
+                    ease: 'Sine.inOut',
+                    duration: 500
+                });
+            })
+            .on('pointerdown', () => this.gotoScene('outro'));
+    }
+}
+class room3 extends AdventureScene {
+    constructor() {
+        super("room3", "This is my test room");
+    }
+    onEnter() {
+        this.add.text(this.w * 0.3, this.w * 0.4, "just go back")
+            .setFontSize(this.s * 2)
+            .setInteractive()
+            .on('pointerover', () => {
+                this.showMessage("You've got no other choice, really.");
+            })
+            .on('pointerdown', () => {
                 this.gotoScene('demo1');
             });
 
@@ -125,7 +155,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [Intro, Demo1, Demo2, Outro],
+    scene: [Intro, Demo1, Demo2, Outro,room3],
     title: "Adventure Game",
 });
 
