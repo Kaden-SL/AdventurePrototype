@@ -16,7 +16,7 @@ Experience requirements:
 
 Asset sources:
 - (For each image/audio/video asset used, describe how it was created. What tool did you use to create it? Was it based on another work? If so, how did you change it, and where can we learn more about the original work for comparison? Use [Markdown link syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#links).)
-- [https://www.youtube.com/watch?v=baUq5va4w3U]('A Fluorescent Bulb II' sound effects library by A Sound Effect) , This base effect was taken, put through an echo and enhancement filter, as well as recut to have the beginning portion repeat, and the middle portion have a more jarring transition.
+- ['A Fluorescent Bulb II' sound effects library by A Sound Effect](https://www.youtube.com/watch?v=baUq5va4w3U) , This base effect was taken, put through an echo and enhancement filter, as well as recut to have the beginning portion repeat, and the middle portion have a more jarring transition.
 
 Code sources:
 - `adventure.js` and `index.html` were created for this project [Adam Smith](https://github.com/rndmcnlly) and edited by me.
