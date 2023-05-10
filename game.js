@@ -122,17 +122,50 @@ class room3 extends AdventureScene {
     }
 }
 
+class userinput extends Phaser.Scene {
+    constructor() {
+        super('userinput')
+    }
+    create() {
+        this.add.text(800,500, "Click anywhere to play intro").setFontSize(20);
+        this.input.on('pointerdown', () => {
+            this.cameras.main.fade(1000, 0,0,0);
+            this.time.delayedCall(1000, () => this.scene.start('intro'));
+        });
+    }
+}
+
 class Intro extends Phaser.Scene {
     constructor() {
         super('intro')
     }
+    preload(){
+        this.load.path = './assets/';
+        this.load.audio('bulb',['lightbulb.mp3']);
+    }
     create() {
-        this.add.text(50,50, "The Room").setFontSize(50);
-        this.add.text(50,100, "Click anywhere to begin.").setFontSize(20);
-        this.input.on('pointerdown', () => {
-            this.cameras.main.fade(1000, 0,0,0);
-            this.time.delayedCall(1000, () => this.scene.start('demo1'));
+        this.audio1= this.sound.add('bulb',{ loop: false });
+        this.audio1.play()
+        this.title= this.add.text(50,50, "The Room").setFontSize(50);
+        this.tweens.add({
+            targets: this.title,
+            alpha:0,
+            duration: 500,
+            repeat:10,
+            yoyo:true,
         });
+        this.time.addEvent({
+            delay:36000,
+        callback: () => {
+            this.add.text(800,500, "Click anywhere to begin.").setFontSize(20);
+            this.input.on('pointerdown', () => {
+                this.cameras.main.fade(1000, 0,0,0);
+                this.time.delayedCall(1000, () => this.scene.start('demo1'));
+            });
+            }
+            
+        })
+       
     }
 }
 
@@ -155,7 +188,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [Intro, Demo1, Demo2, Outro,room3],
+    scene: [userinput,Intro, Demo1, Demo2, Outro,room3],
     title: "Adventure Game",
 });
 
