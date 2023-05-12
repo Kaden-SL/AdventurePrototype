@@ -12,10 +12,11 @@ class AdventureScene extends Phaser.Scene {
         this.load.path = './assets/';
         this.load.image('mainroom', 'mainroom.png');
         this.load.image('hallway', 'hallway.png');
-        // this.load.audio('only',['only.mp3']);
+        this.load.audio('humm',['backgroundhmm.mp3']);
     }
     create() {
         this.keycolor;
+        this.audioswitch= 0;
         this.transitionDuration = 1000;
 
         this.w = this.game.config.width;
@@ -109,13 +110,26 @@ class AdventureScene extends Phaser.Scene {
         }
         return false
     }
-    lightcontroller(){
+    paradiselight(){
         var light = this.lights.addLight(200, 300, 1000, 0xFFFF00, 2);
         this.lights.enable();
         // this.lights.setAmbientColor("#0xFFFF00");
         light.setRadius(700);
         light.setIntensity(5);
         light.setPosition(650, 700);
+    }
+    audiocontroller(){
+        this.audioswitch+=1;
+        console.count();
+        console.log(this.audioswitch)
+        this.music= this.sound.add('humm',{ loop: true, volume:.5 });
+        if(this.audioswitch%2==0){
+            this.music.stop();
+        }
+        else{
+            this.music.play();
+        }
+
     }
     updateInventory() {
         if (this.inventory.length > 0) {

@@ -3,6 +3,7 @@ class Room1 extends AdventureScene {
         super("room1", "First Room");
     }
     onEnter() {
+        this.audiocontroller();
         this.basicroom();
         let door = this.add.text(this.w * 0.28, this.w * 0.38, "🚪 door")
             .setFontSize(this.s * 2)
@@ -50,6 +51,8 @@ class Room2 extends AdventureScene {
         super("room2", "A Familiar Location");
     }
     onEnter() {
+        this.audiocontroller();
+
         this.basicroom();
         let key = this.add.text(this.w * 0.57, this.w * 0.47, this.keyrandomiser())
             .setFontSize(this.s * 2)
@@ -99,14 +102,17 @@ class Paradise extends AdventureScene {
         super("paradise", "The end of your troubles");
     }
     onEnter() {
-        this.lightcontroller();
+        this.paradiselight();
         this.basicroom();
         this.background.setPipeline("Light2D"); 
-        let door = this.add.text(this.w * 0.28, this.w * 0.38, "🚪 door")
+
+        // this.time.delayedCall(1000, () => this.music.stop());
+        
+        let door = this.add.text(this.w * 0.28, this.w * 0.38, "🚪 door?")
             .setFontSize(this.s * 2)
             .setInteractive()
             .setStyle({color: '#000' })
-            .on('pointerover', () => this.showMessage("Just about the only thing in the room"))
+            .on('pointerover', () => this.showMessage("A warm light shines through it, it feels... Peaceful"))
             .on('pointerdown', () => {
                     this.showMessage("*squeak*");
                     door.setText("🚪 opened door");
@@ -123,7 +129,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [Paradise],
-    // scene: [Room1,Room2,Hallway1, Paradise],
+    // scene: [Paradise],
+    scene: [Room1,Room2,Hallway1, Paradise],
     title: "The Room",
 });
