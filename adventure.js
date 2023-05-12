@@ -86,6 +86,24 @@ class AdventureScene extends Phaser.Scene {
     resetmain(){
         this.gotoScene('room1');
     }
+    keyrandomiser(){
+        var keycolor = Math.floor(Math.random() * 3);
+        console.log(keycolor)
+        if(keycolor==0){
+            console.log("0")
+            return "🔑 key"
+            
+        }
+        else if(keycolor==1){
+            console.log("1")
+            return "🗝️ key"
+        }
+        else{
+            console.log("2")
+            return "⚿ key"
+        }
+
+    }
     updateInventory() {
         if (this.inventory.length > 0) {
             this.tweens.add({
