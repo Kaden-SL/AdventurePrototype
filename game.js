@@ -1,63 +1,29 @@
-class Demo1 extends AdventureScene {
+class Room1 extends AdventureScene {
     constructor() {
-        super("demo1", "First Room");
+        super("room1", "First Room");
     }
-
+    preload(){
+        this.load.path = './assets/';
+        this.load.image('mainroom', 'mainroom.png');
+        // this.load.audio('only',['only.mp3']);
+    }
     onEnter() {
-        this.cameras.main.setBackgroundColor('#444');
-        let clip = this.add.text(this.w * 0.3, this.w * 0.3, "📎 paperclip")
+        this.background = this.add.image(
+            720,
+            535,
+            'mainroom',//imagename
+        )
+        this.background.setScale(0.75) 
+        let clip = this.add.text(this.w * 0.28, this.w * 0.38, "🚪 door")
             .setFontSize(this.s * 2)
             .setInteractive()
-            .on('pointerover', () => this.showMessage("Metal, bent."))
+            .setStyle({color: '#000' })
+            .on('pointerover', () => this.showMessage("Just about the only thing in the room"))
             .on('pointerdown', () => {
-                this.showMessage("No touching!");
-                this.tweens.add({
-                    targets: clip,
-                    x: '+=' + this.s,
-                    repeat: 2,
-                    yoyo: true,
-                    ease: 'Sine.inOut',
-                    duration: 100
-                });
-            });
-
-        let key = this.add.text(this.w * 0.5, this.w * 0.1, "🔑 key")
-            .setFontSize(this.s * 2)
-            .setInteractive()
-            .on('pointerover', () => {
-                this.showMessage("It's a nice key.")
-            })
-            .on('pointerdown', () => {
-                this.showMessage("You pick up the key.");
-                this.gainItem('key');
-                this.tweens.add({
-                    targets: key,
-                    y: `-=${2 * this.s}`,
-                    alpha: { from: 1, to: 0 },
-                    duration: 500,
-                    onComplete: () => key.destroy()
-                });
-            })
-
-        let door = this.add.text(this.w * 0.1, this.w * 0.15, "🚪 locked door")
-            .setFontSize(this.s * 2)
-            .setInteractive()
-            .on('pointerover', () => {
-                if (this.hasItem("key")) {
-                    this.showMessage("You've got the key for this door.");
-                } else {
-                    this.showMessage("It's locked. Can you find a key?");
-                }
-            })
-            .on('pointerdown', () => {
-                if (this.hasItem("key")) {
-                    this.loseItem("key");
                     this.showMessage("*squeak*");
-                    door.setText("🚪 unlocked door");
-                    this.gotoScene('demo2');
-                }
+                    door.setText("🚪 opened door");
+                    this.gotoScene('demo2');    
             })
-
     }
 }
 
@@ -127,7 +93,14 @@ class userinput extends Phaser.Scene {
         super('userinput')
     }
     create() {
-        this.add.text(800,500, "Click anywhere to play intro").setFontSize(20);
+
+        
+        this.add.text(800,500, "Click anywhere to play intro").setFontSize(20)
+        
+        // .setPipeline("Light2D"); I'll figure out lights later
+        this.lights.enable();
+        this.lights.setAmbientColor("#0x999999");
+        this.lights.addLight(200, 300, 1000, undefined, 2)
         this.input.on('pointerdown', () => {
             this.cameras.main.fade(1000, 0,0,0);
             this.time.delayedCall(1000, () => this.scene.start('intro'));
@@ -144,6 +117,7 @@ class Intro extends Phaser.Scene {
         this.load.audio('bulb',['lightbulb.mp3']);
     }
     create() {
+        
         this.audio1= this.sound.add('bulb',{ loop: false });
         this.audio1.play()
         this.title= this.add.text(50,50, "The Room").setFontSize(50);
@@ -188,7 +162,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [userinput,Intro, Demo1, Demo2, Outro,room3],
-    title: "Adventure Game",
+    scene: [userinput,Intro, Room1, Demo2, Outro,room3],
+    title: "The Room",
 });
 
