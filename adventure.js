@@ -15,6 +15,7 @@ class AdventureScene extends Phaser.Scene {
         // this.load.audio('only',['only.mp3']);
     }
     create() {
+        this.keycolor;
         this.transitionDuration = 1000;
 
         this.w = this.game.config.width;
@@ -86,23 +87,35 @@ class AdventureScene extends Phaser.Scene {
     resetmain(){
         this.gotoScene('room1');
     }
+
     keyrandomiser(){
-        var keycolor = Math.floor(Math.random() * 3);
-        console.log(keycolor)
-        if(keycolor==0){
-            console.log("0")
+        this.keycolor = Math.floor(Math.random() * 3);
+        if(this.keycolor==0){
             return "🔑 key"
             
         }
-        else if(keycolor==1){
-            console.log("1")
+        else if(this.keycolor==1){
             return "🗝️ key"
         }
         else{
-            console.log("2")
             return "⚿ key"
         }
 
+    }
+    keytoparadise(){
+        var paradisekey = Math.floor(Math.random() * 3);
+        if (this.keycolor==paradisekey){
+            return true
+        }
+        return false
+    }
+    lightcontroller(){
+        var light = this.lights.addLight(200, 300, 1000, 0xFFFF00, 2);
+        this.lights.enable();
+        // this.lights.setAmbientColor("#0xFFFF00");
+        light.setRadius(700);
+        light.setIntensity(5);
+        light.setPosition(650, 700);
     }
     updateInventory() {
         if (this.inventory.length > 0) {

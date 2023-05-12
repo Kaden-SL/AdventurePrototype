@@ -56,11 +56,11 @@ class Room2 extends AdventureScene {
             .setInteractive()
             .setStyle({color: '#000' })
             .on('pointerover', () => {
-                this.showMessage("It's a nice key.")
+                this.showMessage("The first of many? Or one of a kind?")
             })
             .on('pointerdown', () => {
                 this.showMessage("You pick up the key.");
-                this.gainItem('key');
+                this.gainItem('Key');
                 this.tweens.add({
                     targets: key,
                     y: `-=${2 * this.s}`,
@@ -69,11 +69,44 @@ class Room2 extends AdventureScene {
                     onComplete: () => key.destroy()
                 });
             })
+            this.keytoparadise()
         let door = this.add.text(this.w * 0.28, this.w * 0.38, "🔐 door")
             .setFontSize(this.s * 2)
             .setInteractive()
             .setStyle({color: '#000' })
-            .on('pointerover', () => this.showMessage("Familiar, but locked this time"))
+            .on('pointerover', () => {
+                if (this.hasItem("Key")) {
+                    this.showMessage("Open Sesame?");
+                } else {
+                    this.showMessage("Familiar, but locked this time");
+                }
+            })
+            .on('pointerdown', () => {
+                    this.showMessage("*squeak*");
+                    door.setText("🚪 opened door");
+                    if(this.keytoparadise()){
+                        this.gotoScene('paradise');
+                    }
+                    else{
+                    this.gotoScene('hallway1');    
+                    }
+            })
+    }
+}
+
+class Paradise extends AdventureScene {
+    constructor() {
+        super("paradise", "The end of your troubles");
+    }
+    onEnter() {
+        this.lightcontroller();
+        this.basicroom();
+        this.background.setPipeline("Light2D"); 
+        let door = this.add.text(this.w * 0.28, this.w * 0.38, "🚪 door")
+            .setFontSize(this.s * 2)
+            .setInteractive()
+            .setStyle({color: '#000' })
+            .on('pointerover', () => this.showMessage("Just about the only thing in the room"))
             .on('pointerdown', () => {
                     this.showMessage("*squeak*");
                     door.setText("🚪 opened door");
@@ -81,6 +114,8 @@ class Room2 extends AdventureScene {
             })
     }
 }
+
+
 const game = new Phaser.Game({
     scale: {
         mode: Phaser.Scale.FIT,
@@ -88,7 +123,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [Room2],
-    // scene: [Room1,Room2,Hallway1],
+    scene: [Paradise],
+    // scene: [Room1,Room2,Hallway1, Paradise],
     title: "The Room",
 });
