@@ -3,7 +3,7 @@ class Room1 extends AdventureScene {
         super("room1", "First Room");
     }
     onEnter() {
-        this.audiocontroller();
+        this.audiocontroller(1);
         this.basicroom();
         let door = this.add.text(this.w * 0.28, this.w * 0.38, "🚪 door")
             .setFontSize(this.s * 2)
@@ -51,8 +51,8 @@ class Room2 extends AdventureScene {
         super("room2", "A Familiar Location");
     }
     onEnter() {
-        this.audiocontroller();
-
+        this.audiocontroller(0);
+        this.music.isplaying()
         this.basicroom();
         let key = this.add.text(this.w * 0.57, this.w * 0.47, this.keyrandomiser())
             .setFontSize(this.s * 2)
@@ -85,6 +85,7 @@ class Room2 extends AdventureScene {
                 }
             })
             .on('pointerdown', () => {
+                    this.loseItem("Key");
                     this.showMessage("*squeak*");
                     door.setText("🚪 opened door");
                     if(this.keytoparadise()){

@@ -1,6 +1,9 @@
-class AdventureScene extends Phaser.Scene {
+var audioswitch=true;
 
+class AdventureScene extends Phaser.Scene {
+    
     init(data) {
+
         this.inventory = data.inventory || [];
     }
 
@@ -13,10 +16,11 @@ class AdventureScene extends Phaser.Scene {
         this.load.image('mainroom', 'mainroom.png');
         this.load.image('hallway', 'hallway.png');
         this.load.audio('humm',['backgroundhmm.mp3']);
+        
     }
     create() {
         this.keycolor;
-        this.audioswitch= 0;
+        
         this.transitionDuration = 1000;
 
         this.w = this.game.config.width;
@@ -118,16 +122,17 @@ class AdventureScene extends Phaser.Scene {
         light.setIntensity(5);
         light.setPosition(650, 700);
     }
-    audiocontroller(){
-        this.audioswitch+=1;
-        console.count();
-        console.log(this.audioswitch)
+    audiocontroller(option){
         this.music= this.sound.add('humm',{ loop: true, volume:.5 });
-        if(this.audioswitch%2==0){
-            this.music.stop();
-        }
-        else{
+        if(option==0){
+            console.log('on')
             this.music.play();
+            this.music.stop();
+
+        }
+        else if(option==1){
+            this.music.play();
+
         }
 
     }
