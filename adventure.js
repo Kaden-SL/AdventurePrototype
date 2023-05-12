@@ -8,7 +8,12 @@ class AdventureScene extends Phaser.Scene {
         super(key);
         this.name = name;
     }
-
+    preload(){
+        this.load.path = './assets/';
+        this.load.image('mainroom', 'mainroom.png');
+        this.load.image('hallway', 'hallway.png');
+        // this.load.audio('only',['only.mp3']);
+    }
     create() {
         this.transitionDuration = 1000;
 
@@ -62,7 +67,22 @@ class AdventureScene extends Phaser.Scene {
             duration: 4 * this.transitionDuration
         });
     }
-
+    basicroom(){
+        this.background = this.add.image(
+            720,
+            535,
+            'mainroom',
+        );
+        this.background.setScale(0.75) ;
+    }
+    basichall(){
+        this.background = this.add.image(
+            720,
+            535,
+            'hallway',
+        )
+        this.background.setScale(0.75) 
+    }
     resetmain(){
         this.gotoScene('room1');
     }
