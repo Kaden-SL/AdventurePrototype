@@ -166,6 +166,7 @@ class Room2 extends AdventureScene {
                 }
             })
             .on('pointerdown', () => {
+                if(this.hasItem(key)){
                     this.loseItem("Key");
                     this.dooropen();
                     this.showMessage("*squeak*");
@@ -176,6 +177,7 @@ class Room2 extends AdventureScene {
                     else{
                     this.gotoScene('hallway1');    
                     }
+                }
             })
     }
     
@@ -260,7 +262,7 @@ class Neutral extends Phaser.Scene {
 }
 class Hallway2 extends AdventureScene {
     constructor() {
-        super("hallway2", "Here again?");
+        super("hallway2", "Here aga̵̗̭̚ĩ̶̗̄n̴̞̪̾̋?̸̞͎̈́̃");
     }
     onEnter() {
         counter+=1;
@@ -285,7 +287,7 @@ class Hallway2 extends AdventureScene {
 }
 class Room3 extends AdventureScene {
     constructor() {
-        super("room3", "Familiar, but patches seem to be... missing?");
+        super("room3", "Familiar, but patches seem to be... m̷͆͜i̸̫̚s̴̩̊̊s̵̭̿i̶͙̓ń̴̰g̸̙̙͌?̴̯̤͌͛");
     }
     onEnter() {
         this.corruptroom();
@@ -303,7 +305,7 @@ class Room3 extends AdventureScene {
             .setInteractive()
             .setStyle({color: '#000' })
             .on('pointerover', () => {
-                this.showMessage("The first of many? Or one of a kind?")
+                this.showMessage("It stinks of d̸̥̪̅́͆ ̸̡͚̇e̷͚͕͝ ̴͔̟̔͒c̷̰̈̀ ̸̜̯̘̎̍ą̴̤͐͛ ̶̥̖̗̅y̴̦͐̅́")
             })
             .on('pointerdown', () => {
                 this.showMessage("You pick up the key.");
@@ -329,11 +331,13 @@ class Room3 extends AdventureScene {
                 }
             })
             .on('pointerdown', () => {
+                if(this.hasItem("Key")){
                     this.loseItem("Key");
                     this.dooropen();
                     this.showMessage("*squeak*");
                     door.setText("🚪 opened door");
-                    this.gotoScene('hallway2');      
+                    this.gotoScene('hallway2');    
+                }  
             })
     }
     
@@ -373,7 +377,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [Hell],
+    scene: [Room3,Hallway2],
     // scene: [userinput, Intro,Room1,Room2,Hallway1, Paradise,WhiteRoom,Neutral,Hallway2,Hell],
     title: "The Room",
 });
