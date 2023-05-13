@@ -471,7 +471,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [Room3,Hallway2],
-    // scene: [userinput, Intro,Room1,Room2,Hallway1, Paradise,WhiteRoom,Neutral,Hallway2,Hell,Room3,Peace],
+    // scene: [Room3,Hallway2],
+    scene: [userinput, Intro,Room1,Room2,Hallway1, Paradise,WhiteRoom,Neutral,Hallway2,Hell,Room3,Peace],
     title: "The Room",
 });
