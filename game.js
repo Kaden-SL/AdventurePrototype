@@ -251,7 +251,7 @@ class Neutral extends Phaser.Scene {
 
         this.cameras.main.setBackgroundColor('#ffffff')
         this.add.text(800,500, "The void welcomes you, stay awhile...").setFontSize(20).setStyle({color: '#000' })
-        this.input.on('pointerdown', () => this.scene.start('intro'))
+        this.input.on('pointerdown', () => this.scene.start('room1'))
         this.add.text(850,1000, "(click anywhere to restart)").setFontSize(13).setStyle({color: '#000' })
 
 
@@ -428,7 +428,7 @@ class Hell extends Phaser.Scene {
             delay:7000,
         callback: () => {
             this.add.text(850,1000, "(click anywhere to restart)").setFontSize(13).setStyle({color: '#000' });
-            this.input.on('pointerdown', () => this.scene.start('intro'));
+            this.input.on('pointerdown', () => this.scene.start('room1'));
 
             }
             
@@ -455,7 +455,7 @@ class Peace extends Phaser.Scene {
             delay:7000,
         callback: () => {
             this.add.text(850,1000, "(click anywhere to restart)").setFontSize(13).setStyle({color: '#000' });
-            this.input.on('pointerdown', () => this.scene.start('intro'));
+            this.input.on('pointerdown', () => this.scene.start('room1'));
 
             }
             
