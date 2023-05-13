@@ -144,15 +144,15 @@ class AdventureScene extends Phaser.Scene {
         light.setRadius(300)
         return light
     }
-    lightflicker(lighter){
-        lighter.setRadius(500);
-    }
+    // lightflicker(lighter){
+    //     lighter.setRadius(500);
+    // }
     audioon(){
         this.music.play();
     }
-    audiooff(){
-        this.music.pause();
-    }
+    // audiooff(){
+    //     this.music.pause();
+    // }
     updateInventory() {
         if (this.inventory.length > 0) {
             this.tweens.add({

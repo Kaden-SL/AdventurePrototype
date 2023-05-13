@@ -1,3 +1,57 @@
+class userinput extends Phaser.Scene {
+    constructor() {
+        super('userinput')
+    }
+    create() {
+
+        
+        this.add.text(800,500, "Click anywhere to play intro").setFontSize(20)
+        
+        // .setPipeline("Light2D"); I'll figure out lights later
+        this.lights.enable();
+        this.lights.setAmbientColor("#0x999999");
+        this.lights.addLight(200, 300, 1000, undefined, 2)
+        this.input.on('pointerdown', () => {
+            this.cameras.main.fade(1000, 0,0,0);
+            this.time.delayedCall(1000, () => this.scene.start('intro'));
+        });
+    }
+}
+
+class Intro extends Phaser.Scene {
+    constructor() {
+        super('intro')
+    }
+    preload(){
+        this.load.path = './assets/';
+        this.load.audio('bulb',['lightbulb.mp3']);
+    }
+    create() {
+        
+        this.audio1= this.sound.add('bulb',{ loop: false });
+        this.audio1.play()
+        this.title= this.add.text(50,50, "The Room").setFontSize(50);
+        this.tweens.add({
+            targets: this.title,
+            alpha:0,
+            duration: 500,
+            repeat:10,
+            yoyo:true,
+        });
+        this.time.addEvent({
+            delay:36000,
+        callback: () => {
+            this.add.text(800,500, "Click anywhere to begin.").setFontSize(20);
+            this.input.on('pointerdown', () => {
+                this.cameras.main.fade(1000, 0,0,0);
+                this.time.delayedCall(1000, () => this.scene.start('demo1'));
+            });
+            }
+            
+        })
+       
+    }
+}
 class Room1 extends AdventureScene {
     constructor() {
         super("room1", "First Room");
@@ -59,7 +113,7 @@ class Room2 extends AdventureScene {
     }
     onEnter() {
         this.basicroom();
-        this.time.delayedCall(1000, () => 
+        this.time.delayedCall(10000, () => 
         this.add.text(this.w * 0.1, this.w * 0.025, "Stay?")
             .setFontSize(this.s * 2)
             .setInteractive()
@@ -160,7 +214,7 @@ class WhiteRoom extends AdventureScene {
         this.basicroom();
         this.background.setPipeline("Light2D"); 
 
-        this.time.delayedCall(2000, () => 
+        this.time.delayedCall(12000, () => 
         this.add.text(this.w * 0.33, this.w * 0.51, "Remain?")
             .setFontSize(this.s * 2)
             .setInteractive()
@@ -191,11 +245,16 @@ class WhiteRoom extends AdventureScene {
 }
 class Neutral extends Phaser.Scene {
     constructor() {
-        super("neutral");
-        
+        super('neutral')
     }
+    create() {
 
-   
+        this.cameras.main.setBackgroundColor('#ffffff')
+        this.add.text(800,500, "The void welcomes you, stay awhile...").setFontSize(20).setStyle({color: '#000' })
+        this.add.text(850,1000, "(click anywhere to restart)").setFontSize(13).setStyle({color: '#000' })
+        this.input.on('pointerdown', () => this.scene.start('intro'));
+
+    }
 }
 const game = new Phaser.Game({
     scale: {
@@ -204,7 +263,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [WhiteRoom],
-    // scene: [Room1,Room2,Hallway1, Paradise,WhiteRoom],
+    // scene: [Neutral],
+    scene: [userinput, Intro,Room1,Room2,Hallway1, Paradise,WhiteRoom,Neutral],
     title: "The Room",
 });
