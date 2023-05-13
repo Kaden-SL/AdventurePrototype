@@ -127,14 +127,21 @@ class AdventureScene extends Phaser.Scene {
         var light = this.lights.addLight(200, 300, 1000, 0xFFFF00, 2);
         this.lights.enable();
         // this.lights.setAmbientColor("#0xFFFF00");
-        
         light.setIntensity(5);
         light.setPosition(650, 700);
-        
         light.setRadius(300)
         this.time.delayedCall(1000, () => light.setRadius(400));
         this.time.delayedCall(2000, () => light.setRadius(500));
         this.time.delayedCall(3000, () => light.setRadius(750));
+        return light
+    }
+    whiteroomlight(){
+        var light = this.lights.addLight(200, 300, 1000, 0xFFFFFF, 2);
+        this.lights.enable();
+        // this.lights.setAmbientColor("#0xFFFF00");
+        light.setIntensity(5);
+        light.setPosition(650, 700);
+        light.setRadius(300)
         return light
     }
     lightflicker(lighter){
