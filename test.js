@@ -108,11 +108,11 @@ class Paradise extends AdventureScene {
         super("paradise", "The end of your troubles");
     }
     onEnter() {
-        this.paradiselight();
+        var light = this.paradiselight();
         this.basicroom();
         this.background.setPipeline("Light2D"); 
 
-        // this.time.delayedCall(1000, () => this.music.stop());
+        this.time.delayedCall(3000, () => this.lightflicker(light));
         
         let door = this.add.text(this.w * 0.28, this.w * 0.38, "🚪 door?")
             .setFontSize(this.s * 2)
@@ -135,7 +135,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    // scene: [Paradise],
-    scene: [Room1,Room2,Hallway1, Paradise],
+    scene: [Paradise],
+    // scene: [Room1,Room2,Hallway1, Paradise],
     title: "The Room",
 });
