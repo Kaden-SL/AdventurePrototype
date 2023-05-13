@@ -15,14 +15,16 @@ class AdventureScene extends Phaser.Scene {
         this.load.path = './assets/';
         this.load.image('mainroom', 'mainroom.png');
         this.load.image('hallway', 'hallway.png');
+        this.load.image('corrupt', 'corrupt.png');
         this.load.audio('humm',['backgroundhmm.mp3']);
         this.load.audio('door',['doorsound.mp3']);
         this.load.audio('ding',['ding.mp3']);
         this.load.audio('anger',['angryhumm.wav']);
-        
+        this.load.audio('hell',['hellsound.wav']);
     }
     create() {
         this.keycolor;
+        this.hell= this.sound.add('humm',{ loop: true, volume:.2 });
         this.music= this.sound.add('humm',{ loop: true, volume:.5 });
         this.anger= this.sound.add('anger',{ loop: true, volume:2 });
         this.door= this.sound.add('door',{ loop: false, volume:.25 });
@@ -87,6 +89,14 @@ class AdventureScene extends Phaser.Scene {
         );
         this.background.setScale(0.75) ;
     }
+    corruptroom(){
+        this.background = this.add.image(
+            720,
+            535,
+            'corrupt',
+        );
+        this.background.setScale(0.75) ;
+    }
     basichall(){
         this.background = this.add.image(
             720,
@@ -103,6 +113,9 @@ class AdventureScene extends Phaser.Scene {
     }
     angery(){
         this.anger.play();
+    }
+    hellish(){
+        this.hell.play();
     }
     dooropen(){
         this.door.play();

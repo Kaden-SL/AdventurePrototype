@@ -252,8 +252,9 @@ class Neutral extends Phaser.Scene {
 
         this.cameras.main.setBackgroundColor('#ffffff')
         this.add.text(800,500, "The void welcomes you, stay awhile...").setFontSize(20).setStyle({color: '#000' })
+        this.input.on('pointerdown', () => this.scene.start('intro'))
         this.add.text(850,1000, "(click anywhere to restart)").setFontSize(13).setStyle({color: '#000' })
-        this.input.on('pointerdown', () => this.scene.start('intro'));
+
 
     }
 }
@@ -284,10 +285,10 @@ class Hallway2 extends AdventureScene {
 }
 class Room3 extends AdventureScene {
     constructor() {
-        super("room3", "A Familiar Location");
+        super("room3", "Familiar, but patches seem to be... missing?");
     }
     onEnter() {
-        this.basicroom();
+        this.corruptroom();
         this.add.text(this.w * 0.33, this.w * 0.51, "Go back?")
             .setFontSize(this.s * 2)
             .setInteractive()
@@ -337,6 +338,34 @@ class Room3 extends AdventureScene {
     }
     
 }
+class Hell extends Phaser.Scene {
+    constructor() {
+        super('hell')
+    }
+    preload(){
+        this.load.path = './assets/';
+        this.load.audio('hell',['hellsound.wav']);
+    }
+    create() {
+        this.game.sound.stopAll();
+        this.hell= this.sound.add('hell',{ loop: true, volume:.2 });
+        this.hell.play();
+        this.cameras.main.setBackgroundColor('#F11514')
+        this.add.text(800,500, "Y̴͓̼̎o̷͕̳͑̀u̴͍̼͎͘ ̶͉͗ȟ̸̛̪̥̩a̴̬͋̿͘v̶̱̞͑̉e̷̖̥͊͆͠ͅ ̸̨̃f̸͎̚a̵̙̦͋͋l̸̤̮̰͒͗͝l̷̲̝̩͗̀̉e̵̬̱͛͒n̶̡̺̮͋͌ ̷̞͝c̸̪͊͝h̵̛̘̒ĭ̵͍͋l̷̢͚͔̉̋d̵̬͂").setFontSize(20).setStyle({color: '#000' })
+        this.time.addEvent({
+            delay:7000,
+        callback: () => {
+            this.add.text(850,1000, "(click anywhere to restart)").setFontSize(13).setStyle({color: '#000' });
+            this.input.on('pointerdown', () => this.scene.start('intro'));
+
+            }
+            
+        })
+        t
+
+
+    }
+}
 const game = new Phaser.Game({
     scale: {
         mode: Phaser.Scale.FIT,
@@ -344,7 +373,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [Hallway2,Room3],
-    // scene: [userinput, Intro,Room1,Room2,Hallway1, Paradise,WhiteRoom,Neutral,Hallway2],
+    scene: [Hell],
+    // scene: [userinput, Intro,Room1,Room2,Hallway1, Paradise,WhiteRoom,Neutral,Hallway2,Hell],
     title: "The Room",
 });
