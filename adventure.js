@@ -18,11 +18,13 @@ class AdventureScene extends Phaser.Scene {
         this.load.audio('humm',['backgroundhmm.mp3']);
         this.load.audio('door',['doorsound.mp3']);
         this.load.audio('ding',['ding.mp3']);
+        this.load.audio('anger',['angryhumm.wav']);
         
     }
     create() {
         this.keycolor;
         this.music= this.sound.add('humm',{ loop: true, volume:.5 });
+        this.anger= this.sound.add('anger',{ loop: true, volume:2 });
         this.door= this.sound.add('door',{ loop: false, volume:.25 });
         this.ding= this.sound.add('ding',{ loop: false, volume:.25 });
         this.transitionDuration = 1000;
@@ -98,6 +100,9 @@ class AdventureScene extends Phaser.Scene {
     }
     dong(){
         this.ding.play();
+    }
+    angery(){
+        this.anger.play();
     }
     dooropen(){
         this.door.play();
