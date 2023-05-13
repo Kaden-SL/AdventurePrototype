@@ -1,4 +1,4 @@
-var audioswitch=true;
+
 
 class AdventureScene extends Phaser.Scene {
     
@@ -20,7 +20,7 @@ class AdventureScene extends Phaser.Scene {
     }
     create() {
         this.keycolor;
-        
+        this.music= this.sound.add('humm',{ loop: true, volume:.5 });
         this.transitionDuration = 1000;
 
         this.w = this.game.config.width;
@@ -122,19 +122,11 @@ class AdventureScene extends Phaser.Scene {
         light.setIntensity(5);
         light.setPosition(650, 700);
     }
-    audiocontroller(option){
-        this.music= this.sound.add('humm',{ loop: true, volume:.5 });
-        if(option==0){
-            console.log('on')
-            this.music.play();
-            this.music.stop();
-
-        }
-        else if(option==1){
-            this.music.play();
-
-        }
-
+    audioon(){
+        this.music.play();
+    }
+    audiooff(){
+        this.music.pause();
     }
     updateInventory() {
         if (this.inventory.length > 0) {

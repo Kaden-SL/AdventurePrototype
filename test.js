@@ -1,10 +1,13 @@
 class Room1 extends AdventureScene {
     constructor() {
         super("room1", "First Room");
+        
     }
+
     onEnter() {
-        this.audiocontroller(1);
         this.basicroom();
+        this.audioon();
+
         let door = this.add.text(this.w * 0.28, this.w * 0.38, "🚪 door")
             .setFontSize(this.s * 2)
             .setInteractive()
@@ -51,8 +54,8 @@ class Room2 extends AdventureScene {
         super("room2", "A Familiar Location");
     }
     onEnter() {
-        this.audiocontroller(0);
-        this.music.isplaying()
+        this.audiooff();
+        this.music.stop();
         this.basicroom();
         let key = this.add.text(this.w * 0.57, this.w * 0.47, this.keyrandomiser())
             .setFontSize(this.s * 2)
