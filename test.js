@@ -7,7 +7,6 @@ class Room1 extends AdventureScene {
     onEnter() {
         this.basicroom();
         this.audioon();
-
         let door = this.add.text(this.w * 0.28, this.w * 0.38, "🚪 door")
             .setFontSize(this.s * 2)
             .setInteractive()
@@ -19,6 +18,7 @@ class Room1 extends AdventureScene {
                     this.gotoScene('hallway1');    
             })
     }
+   
 }
 
 class Hallway1 extends AdventureScene {
@@ -26,6 +26,7 @@ class Hallway1 extends AdventureScene {
         super("hallway1", "There seems to be a hallway");
     }
     onEnter() {
+        this.game.sound.stopAll();
         this.basichall();
         this.add.text(this.w * 0.33, this.w * 0.51, "Go back")
             .setFontSize(this.s * 2)
@@ -54,8 +55,8 @@ class Room2 extends AdventureScene {
         super("room2", "A Familiar Location");
     }
     onEnter() {
-        this.audiooff();
-        this.music.stop();
+
+        this.audioon();
         this.basicroom();
         let key = this.add.text(this.w * 0.57, this.w * 0.47, this.keyrandomiser())
             .setFontSize(this.s * 2)
@@ -99,6 +100,7 @@ class Room2 extends AdventureScene {
                     }
             })
     }
+    
 }
 
 class Paradise extends AdventureScene {
