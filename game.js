@@ -269,14 +269,29 @@ class Hallway2 extends AdventureScene {
         this.game.sound.stopAll();
         this.angery();
         this.basichall();
-        this.add.text(this.w * 0.33, this.w * 0.51, "Go b̵̦͂á̷͕c̷͉̒k̴̖̀?̸̝̓")
+        this.backtext= this.add.text(this.w * 0.33, this.w * 0.51, "Go b̵̦͂á̷͕c̷͉̒k̴̖̀?̸̝̓")
             .setFontSize(this.s * 2)
             .setInteractive()
             .on('pointerover', () => {
                 this.showMessage("To the last o̵r̷ ̸f̷i̸r̴s̷t̷ ̴t̸u̶n̶n̴e̷l̸?̵");
             })
             .on('pointerdown', () => {
-                this.gotoScene('room3');
+                this.time.addEvent({
+                    delay:2000,
+                callback: () => {
+                    this.gotoScene('room3');
+                    }
+                    
+                })
+                this.tweens.add({
+                    targets: this.backtext,
+                    x: 1000,
+                    duration: 1000,
+                    repeat: 0,
+                    hold: 500,
+                    ease: 'cubic.out'
+                });
+  
             });
         let door = this.add.text(this.w * 0.36, this.w * 0.34, "🚪 d̵͍͑o̴̺͐o̷͚͆r̵͔̀?̴̜̑")
             .setFontSize(this.s * 1)
@@ -284,10 +299,27 @@ class Hallway2 extends AdventureScene {
             .setStyle({color: '#000' })
             .on('pointerover', () => this.showMessage("Haven't I done this before?"))
             .on('pointerdown', () => {
+                this.time.addEvent({
+                    delay:2000,
+                callback: () => {
                     this.dooropen();
                     this.showMessage("*squeak*");
                     door.setText("🚪 opened door");
-                    this.gotoScene('room3');    
+                    this.gotoScene('room3');
+                    }
+                    
+                })
+                this.tweens.add({
+                    targets: door,
+                    y: 1000,
+                    duration: 1000,
+                    repeat: 0,
+                    hold: 500,
+                    ease: 'cubic.out'
+                });
+  
+                    
+  
             })
     }
 }
@@ -297,14 +329,29 @@ class Room3 extends AdventureScene {
     }
     onEnter() {
         this.corruptroom();
-        this.add.text(this.w * 0.33, this.w * 0.51, "Go b̵̦͂á̷͕c̷͉̒k̴̖̀?̸̝̓")
+        this.backtext=this.add.text(this.w * 0.33, this.w * 0.51, "Go b̵̦͂á̷͕c̷͉̒k̴̖̀?̸̝̓")
             .setFontSize(this.s * 2)
             .setInteractive()
             .on('pointerover', () => {
                 this.showMessage("To the last o̵r̷ ̸f̷i̸r̴s̷t̷ ̴t̸u̶n̶n̴e̷l̸?̵");
             })
             .on('pointerdown', () => {
-                this.gotoScene('hallway2');
+                this.time.addEvent({
+                    delay:2000,
+                callback: () => {
+                    this.gotoScene('hallway2');
+                    }
+                    
+                })
+                this.tweens.add({
+                    targets: this.backtext,
+                    x: 50,
+                    duration: 1000,
+                    repeat: 0,
+                    hold: 500,
+                    ease: 'cubic.out'
+                });
+  
             });
         let key = this.add.text(this.w * 0.57, this.w * 0.47, this.keyrandomiser())
             .setFontSize(this.s * 2)
@@ -338,11 +385,26 @@ class Room3 extends AdventureScene {
             })
             .on('pointerdown', () => {
                 if(this.hasItem("Key")){
-                    this.loseItem("Key");
+                    this.time.addEvent({
+                        delay:2000,
+                    callback: () => {
+                        this.loseItem("Key");
                     this.dooropen();
                     this.showMessage("*squeak*");
                     door.setText("🚪 opened door");
                     this.gotoScene('hallway2');    
+                        }
+                        
+                    })
+                    this.tweens.add({
+                        targets: door,
+                        y: 0,
+                        duration: 1000,
+                        repeat: 0,
+                        hold: 500,
+                        ease: 'cubic.out'
+                    });
+                    
                 }  
             })
     }
@@ -409,7 +471,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    // scene: [Peace],
-    scene: [Room1,Room2,Hallway1, Paradise,WhiteRoom,Neutral,Hallway2,Hell,Room3,Peace],
+    scene: [Room3,Hallway2],
+    // scene: [userinput, Intro,Room1,Room2,Hallway1, Paradise,WhiteRoom,Neutral,Hallway2,Hell,Room3,Peace],
     title: "The Room",
 });
