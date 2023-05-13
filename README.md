@@ -30,4 +30,5 @@ Code sources:
 
 Notes by me:
 - Sorry this took so long, I was having days worth of trouble with very specific stuff like switching the audio on and off between scenes, using math.random to determine keys between methods, that I got caught up and often burnt out. 
-- I had a much grander original vision for what this would look like, where the rooms would gradually corrupt, and the game wouldn't be so abrupt, but sadly I overreached between my work schedule and the rest of my schoolwork. 
+- I had a much grander original vision for what this would look like, where the rooms would gradually corrupt, and the game wouldn't be so abrupt, but sadly I overreached between my work schedule and the rest of my schoolwork.  
+- I spent way too much time making and recording assets, and it shows in my games final version, I kinda tacked on the interactive objects portion as I wasn't quite sure how to keep my theme going without making my own unique object besides keys. 
