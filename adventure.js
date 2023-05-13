@@ -16,11 +16,15 @@ class AdventureScene extends Phaser.Scene {
         this.load.image('mainroom', 'mainroom.png');
         this.load.image('hallway', 'hallway.png');
         this.load.audio('humm',['backgroundhmm.mp3']);
+        this.load.audio('door',['doorsound.mp3']);
+        this.load.audio('ding',['ding.mp3']);
         
     }
     create() {
         this.keycolor;
         this.music= this.sound.add('humm',{ loop: true, volume:.5 });
+        this.door= this.sound.add('door',{ loop: false, volume:.25 });
+        this.ding= this.sound.add('ding',{ loop: false, volume:.25 });
         this.transitionDuration = 1000;
 
         this.w = this.game.config.width;
@@ -92,7 +96,12 @@ class AdventureScene extends Phaser.Scene {
     resetmain(){
         this.gotoScene('room1');
     }
-
+    dong(){
+        this.ding.play();
+    }
+    dooropen(){
+        this.door.play();
+    }
     keyrandomiser(){
         this.keycolor = Math.floor(Math.random() * 3);
         if(this.keycolor==0){
@@ -170,6 +179,7 @@ class AdventureScene extends Phaser.Scene {
     }
 
     gainItem(item) {
+        this.dong();
         if (this.inventory.includes(item)) {
             console.warn('gaining item already held:', item);
             return;
