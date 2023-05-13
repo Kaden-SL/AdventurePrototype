@@ -45,7 +45,7 @@ class Intro extends Phaser.Scene {
             this.add.text(800,500, "Click anywhere to begin.").setFontSize(20);
             this.input.on('pointerdown', () => {
                 this.cameras.main.fade(1000, 0,0,0);
-                this.time.delayedCall(1000, () => this.scene.start('demo1'));
+                this.time.delayedCall(1000, () => this.scene.start('room1'));
             });
             }
             
@@ -166,7 +166,7 @@ class Room2 extends AdventureScene {
                 }
             })
             .on('pointerdown', () => {
-                if(this.hasItem(key)){
+                if(this.hasItem("Key")){
                     this.loseItem("Key");
                     this.dooropen();
                     this.showMessage("*squeak*");
@@ -175,7 +175,7 @@ class Room2 extends AdventureScene {
                         this.gotoScene('paradise');
                     }
                     else{
-                    this.gotoScene('hallway1');    
+                    this.gotoScene('hallway2');    
                     }
                 }
             })
@@ -188,6 +188,7 @@ class Paradise extends AdventureScene {
         super("paradise", "The end of your troubles");
     }
     onEnter() {
+        this.game.sound.stopAll();
         this.paradiselight();
         this.basicroom();
         this.background.setPipeline("Light2D"); 
@@ -202,7 +203,7 @@ class Paradise extends AdventureScene {
             .on('pointerdown', () => {
                     this.showMessage("*squeak*");
                     door.setText("🚪 opened door");
-                    this.gotoScene('hallway1');    
+                    this.gotoScene('peace');    
             })
     }
 }
@@ -266,13 +267,22 @@ class Hallway2 extends AdventureScene {
     }
     onEnter() {
         counter+=1;
-        if (counter==20){
+        if (counter==6){
             this.gotoScene('hell');
         }
         this.game.sound.stopAll();
         this.angery();
         this.basichall();
-        let door = this.add.text(this.w * 0.36, this.w * 0.34, "🚪 door")
+        this.add.text(this.w * 0.33, this.w * 0.51, "Go b̵̦͂á̷͕c̷͉̒k̴̖̀?̸̝̓")
+            .setFontSize(this.s * 2)
+            .setInteractive()
+            .on('pointerover', () => {
+                this.showMessage("To the last o̵r̷ ̸f̷i̸r̴s̷t̷ ̴t̸u̶n̶n̴e̷l̸?̵");
+            })
+            .on('pointerdown', () => {
+                this.gotoScene('room3');
+            });
+        let door = this.add.text(this.w * 0.36, this.w * 0.34, "🚪 d̵͍͑o̴̺͐o̷͚͆r̵͔̀?̴̜̑")
             .setFontSize(this.s * 1)
             .setInteractive()
             .setStyle({color: '#000' })
@@ -287,15 +297,15 @@ class Hallway2 extends AdventureScene {
 }
 class Room3 extends AdventureScene {
     constructor() {
-        super("room3", "Familiar, but patches seem to be... m̷͆͜i̸̫̚s̴̩̊̊s̵̭̿i̶͙̓ń̴̰g̸̙̙͌?̴̯̤͌͛");
+        super("room3", "Familiar, but patches seem to be... m̶i̴s̴s̴i̸n̵g̵");
     }
     onEnter() {
         this.corruptroom();
-        this.add.text(this.w * 0.33, this.w * 0.51, "Go back?")
+        this.add.text(this.w * 0.33, this.w * 0.51, "Go b̵̦͂á̷͕c̷͉̒k̴̖̀?̸̝̓")
             .setFontSize(this.s * 2)
             .setInteractive()
             .on('pointerover', () => {
-                this.showMessage("To the last tunnel");
+                this.showMessage("To the last o̵r̷ ̸f̷i̸r̴s̷t̷ ̴t̸u̶n̶n̴e̷l̸?̵");
             })
             .on('pointerdown', () => {
                 this.gotoScene('hallway2');
@@ -319,15 +329,15 @@ class Room3 extends AdventureScene {
                 });
             })
     
-        let door = this.add.text(this.w * 0.28, this.w * 0.38, "🔐 door")
+        let door = this.add.text(this.w * 0.28, this.w * 0.38, "🔐 d̵̛͙͓̼̮̮͉̲̞͇̣͒́̈͐̄̇o̵̠͈̗̠͓̐o̷̦͔̤̺̙͗ř̶̨̡̤̗͙̗̠͔̼̬̱̎̈́̂͌̚̚͝͠?̵̦̦̱̜̣̘͓̗̿̈́̃͗̓͐͝")
             .setFontSize(this.s * 2)
             .setInteractive()
             .setStyle({color: '#000' })
             .on('pointerover', () => {
                 if (this.hasItem("Key")) {
-                    this.showMessage("Maybe something different this time?");
+                    this.showMessage("let m̴e̷ ̸o̶ ̴u̷ ̵t̷");
                 } else {
-                    this.showMessage("Familiar, and locked again?");
+                    this.showMessage("Familiar, and locked a̵g̷a̷i̴n̷?̸");
                 }
             })
             .on('pointerdown', () => {
@@ -352,7 +362,7 @@ class Hell extends Phaser.Scene {
     }
     create() {
         this.game.sound.stopAll();
-        this.hell= this.sound.add('hell',{ loop: true, volume:.2 });
+        this.hell= this.sound.add('hell',{ loop: true, volume:.5 });
         this.hell.play();
         this.cameras.main.setBackgroundColor('#F11514')
         this.add.text(800,500, "Y̴͓̼̎o̷͕̳͑̀u̴͍̼͎͘ ̶͉͗ȟ̸̛̪̥̩a̴̬͋̿͘v̶̱̞͑̉e̷̖̥͊͆͠ͅ ̸̨̃f̸͎̚a̵̙̦͋͋l̸̤̮̰͒͗͝l̷̲̝̩͗̀̉e̵̬̱͛͒n̶̡̺̮͋͌ ̷̞͝c̸̪͊͝h̵̛̘̒ĭ̵͍͋l̷̢͚͔̉̋d̵̬͂").setFontSize(20).setStyle({color: '#000' })
@@ -365,7 +375,33 @@ class Hell extends Phaser.Scene {
             }
             
         })
-        t
+
+
+    }
+}
+class Peace extends Phaser.Scene {
+    constructor() {
+        super('peace')
+    }
+    preload(){
+        this.load.path = './assets/';
+        this.load.audio('peace',['peace.wav']);
+    }
+    create() {
+        this.game.sound.stopAll();
+        this.hell= this.sound.add('peace',{ loop: true, volume:.5 });
+        this.hell.play();
+        this.cameras.main.setBackgroundColor('#7eb2c5')
+        this.add.text(800,500, "A well deserved rest, my child.").setFontSize(20).setStyle({color: '#000' })
+        this.time.addEvent({
+            delay:7000,
+        callback: () => {
+            this.add.text(850,1000, "(click anywhere to restart)").setFontSize(13).setStyle({color: '#000' });
+            this.input.on('pointerdown', () => this.scene.start('intro'));
+
+            }
+            
+        })
 
 
     }
@@ -377,7 +413,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [Room3,Hallway2],
-    // scene: [userinput, Intro,Room1,Room2,Hallway1, Paradise,WhiteRoom,Neutral,Hallway2,Hell],
+    scene: [Peace],
+    // scene: [userinput, Intro,Room1,Room2,Hallway1, Paradise,WhiteRoom,Neutral,Hallway2,Hell,Room3],
     title: "The Room",
 });
