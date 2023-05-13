@@ -268,7 +268,7 @@ class Hallway2 extends AdventureScene {
         }
         this.game.sound.stopAll();
         this.angery();
-        this.basichall();
+        this.corrupthall();
         this.backtext= this.add.text(this.w * 0.33, this.w * 0.51, "Go b̵̦͂á̷͕c̷͉̒k̴̖̀?̸̝̓")
             .setFontSize(this.s * 2)
             .setInteractive()
